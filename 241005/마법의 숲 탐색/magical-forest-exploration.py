@@ -215,8 +215,8 @@ for a,d in stone:
     #중심좌표
  
     if dfs(1,a,d) == False:
-            maps = [[0]*(c) for _ in range(r+3)]
-            direction = []
-            dfs(1,a,d)
+        maps = [[0]*(c) for _ in range(r+3)]
+        direction = []
+        dfs(1,a,d)
         
 print(answer)
