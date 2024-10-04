@@ -138,10 +138,7 @@ def bfs(a,b):
                 q.append((nx,ny))
                 visited[nx][ny] = 1
                 tmp = max(tmp,nx)
-            elif [nx,ny] in direction:
-                q.append((nx,ny))
-                visited[nx][ny] = 1
-                tmp = max(tmp,nx)
+          
             elif maps[x][y] == 2 and visited[nx][ny] == 0 and maps[nx][ny] != 0:
                 q.append((nx,ny))
                 visited[nx][ny] = 1
