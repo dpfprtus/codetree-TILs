@@ -138,7 +138,7 @@ def bfs(a,b):
                 q.append((nx,ny))
                 visited[nx][ny] = 1
                 tmp = max(tmp,nx)
-            elif visited[nx][ny] == 0 and [nx,ny] in direction:
+            elif visited[nx][ny] == 0 and maps[nx][ny] !=0 and [nx,ny,maps[x][y]] in direction:
                 q.append((nx,ny))
                 visited[nx][ny] = 1
                 tmp = max(tmp,nx)
@@ -146,7 +146,7 @@ def bfs(a,b):
                 q.append((nx,ny))
                 visited[nx][ny] = 1
                 tmp = max(tmp,nx)
-
+ 
     return tmp-2
 
 seperate = 3
@@ -171,14 +171,15 @@ def fill_diferent(x,y,d):
     elif maps[x+1][y] == 2:
         t1,t2 = x+1,y
   
-    direction.append([t1,t2])
+    direction.append([t1,t2,seperate])
     seperate += 1
 
 def dfs(x,y,d):
     global maps
     global answer
-
+  
     if x == len(maps)-2:
+
         answer = answer+x-1
 
         fill_diferent(x,y,d)
