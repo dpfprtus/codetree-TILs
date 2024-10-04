@@ -177,9 +177,8 @@ def fill_diferent(x,y,d):
 def dfs(x,y,d):
     global maps
     global answer
-  
-    if x == len(maps)-2:
 
+    if x == len(maps)-2:
         answer = answer+x-1
         fill_diferent(x,y,d)
         return True
@@ -197,7 +196,8 @@ def dfs(x,y,d):
         d = chain(d,x,y,4)
         dfs(x+1,y+1,d)
     else:
-        if x < 4:
+        if x <= 3:
+            maps = [[0]*(c) for _ in range(r+3)]
             return False
         fill_diferent(x,y,d)
         answer += bfs(x,y)
@@ -216,8 +216,8 @@ for a,d in stone:
     #중심좌표
  
     if dfs(1,a,d) == False:
-        maps = [[0]*(c) for _ in range(r+3)]
         direction = []
+        maps = [[0]*(c) for _ in range(r+3)]
         dfs(1,a,d)
-        
+
 print(answer)
