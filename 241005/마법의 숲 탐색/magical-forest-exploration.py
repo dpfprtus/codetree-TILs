@@ -161,12 +161,13 @@ def fill_diferent(x,y,d):
     maps[x-1][y] = seperate
     maps[x+1][y] = seperate
     fill_dir(x,y,d)
+
     if maps[x][y+1] == 2:
         t1,t2 = x,y+1
     elif maps[x][y-1] == 2:
         t1,t2 = x,y-1
     elif maps[x-1][y] == 2:
-        t1,t2 = x-1,y-1
+        t1,t2 = x-1,y
     elif maps[x+1][y] == 2:
         t1,t2 = x+1,y
   
