@@ -198,6 +198,7 @@ def dfs(x,y,d):
     else:
         if x <= 3:
             maps = [[0]*(c) for _ in range(r+3)]
+            direction = []
             return False
         fill_diferent(x,y,d)
         answer += bfs(x,y)
