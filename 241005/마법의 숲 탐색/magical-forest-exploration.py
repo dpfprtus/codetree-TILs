@@ -1,5 +1,6 @@
 from collections import deque
-
+import sys
+input = sys.stdin.readline
 r,c,k = map(int,input().split())
 
 stone = []
