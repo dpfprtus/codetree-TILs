@@ -162,8 +162,8 @@ def dfs(x,y,d):
     global answer
  
     #남쪽
-    if x == len(maps)-1:
-        answer += (x-2)
+    if x == len(maps)-2:
+        answer = answer + x +1
         fill_diferent(x,y,d)
         return True
     if check(x,y,2):
