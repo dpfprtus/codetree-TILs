@@ -75,11 +75,11 @@ def knight_move_check(k,r,c,w,h,d):
             if not check_range(i,j) or chess[i][j] == 2:
                 return False
             if knight_map[i][j] != -1 and knight_map[i][j] != k:
-                i = knight[knight_map[i][j]][0]
-                j = knight[knight_map[i][j]][1]
+                ii = knight[knight_map[i][j]][0]
+                jj = knight[knight_map[i][j]][1]
                 w = knight[knight_map[i][j]][2]
                 h = knight[knight_map[i][j]][3]
-                knight_move_check(knight_map[i][j],i,j,w,h,d)
+                knight_move_check(knight_map[i][j],ii,jj,w,h,d)
     return True
 
 #함정 체크하고 함정만큼 나이트 체력 깎기
