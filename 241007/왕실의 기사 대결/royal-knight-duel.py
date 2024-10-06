@@ -35,7 +35,7 @@ answer = 0
 
 knight_num_chess = 0
 for _ in range(N):
-    r,c,w,h,k = map(int,input().split())
+    r,c,h,w,k = map(int,input().split())
     r-=1
     c-=1
     knight.append([r,c,w,h,k])
