@@ -112,11 +112,11 @@ def knight_move(first_knight_num,knight_num,r,c,w,h,d):
             i += dr[d]
             j += dc[d]
             if knight_map[i][j] != knight_num and knight_map[i][j] != -1:
-                i = knight[knight_map[i][j]][0]
-                j = knight[knight_map[i][j]][1]
+                ii = knight[knight_map[i][j]][0]
+                jj = knight[knight_map[i][j]][1]
                 wi = knight[knight_map[i][j]][2]
                 hi = knight[knight_map[i][j]][3]
-                knight_move(first_knight_num,knight_map[i][j],i,j,wi,hi,d)
+                knight_move(first_knight_num,knight_map[i][j],ii,jj,wi,hi,d)
             knight_map[i][j] = knight_num
             i -= dr[d]
             j -= dc[d]
