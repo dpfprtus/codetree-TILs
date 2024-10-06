@@ -66,8 +66,7 @@ dc = [0,1,0,-1]
 
 #기사가 밀칠 수 있는지 체크
 def knight_move_check(k,r,c,w,h,d):
-    global flag
-    flag = 0
+
     for i in range(r,r+h):
         ni = i+dr[d]
         for j in range(c,c+w):
@@ -75,17 +74,15 @@ def knight_move_check(k,r,c,w,h,d):
             nj = j+dc[d]
        
             if not check_range(ni,nj) or chess[ni][nj] == 2:
-                flag = 1
+         
                 return False
             if knight_map[ni][nj] != -1 and knight_map[ni][nj] != k:
                 ii = knight[knight_map[ni][nj]][0]
                 jj = knight[knight_map[ni][nj]][1]
                 ww = knight[knight_map[ni][nj]][2]
                 hh = knight[knight_map[ni][nj]][3]
-                knight_move_check(knight_map[ni][nj],ii,jj,ww,hh,d)
-        
-    if flag == 1:
-        return False
+                if not knight_move_check(knight_map[ni][nj],ii,jj,ww,hh,d):
+                    return False
     return True
 
 #함정 체크하고 함정만큼 나이트 체력 깎기
@@ -115,11 +112,9 @@ def check_hole(knight_num,r,c,w,h):
 def knight_move(first_knight_num,knight_num,r,c,w,h,d):
     
     for i in range(r,r+h):
-        
         for j in range(c,c+w):
             ni = i+ dr[d]
             nj = j+dc[d]
-     
             
             if knight_map[ni][nj] != knight_num and knight_map[ni][nj] != -1:
                 ii = knight[knight_map[ni][nj]][0]
