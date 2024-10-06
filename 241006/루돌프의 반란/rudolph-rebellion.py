@@ -202,6 +202,7 @@ def santa_move(iok):
                     if santa[k][0] == r and santa[k][1] == c:
                         santa[i][0] += dr[santa[k][2]]
                         santa[i][1] +=  dc[santa[k][2]]
+                        santa[i][2] = santa[k][2]
                         k = i
                         flag = 1
                         #죽으면
