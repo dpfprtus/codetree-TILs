@@ -32,7 +32,7 @@ knight = []
 end = [0]*N
 
 answer = 0
-
+score = [0]*N
 knight_num_chess = 0
 for _ in range(N):
     r,c,h,w,k = map(int,input().split())
@@ -66,36 +66,44 @@ dc = [0,1,0,-1]
 
 #기사가 밀칠 수 있는지 체크
 def knight_move_check(k,r,c,w,h,d):
-
+    global flag
+    flag = 0
     for i in range(r,r+h):
+        ni = i+dr[d]
         for j in range(c,c+w):
-            i += dr[d]
-            j += dc[d]
+            
+            nj = j+dc[d]
        
-            if not check_range(i,j) or chess[i][j] == 2:
+            if not check_range(ni,nj) or chess[ni][nj] == 2:
+                flag = 1
                 return False
-            if knight_map[i][j] != -1 and knight_map[i][j] != k:
-                ii = knight[knight_map[i][j]][0]
-                jj = knight[knight_map[i][j]][1]
-                w = knight[knight_map[i][j]][2]
-                h = knight[knight_map[i][j]][3]
-                knight_move_check(knight_map[i][j],ii,jj,w,h,d)
+            if knight_map[ni][nj] != -1 and knight_map[ni][nj] != k:
+                ii = knight[knight_map[ni][nj]][0]
+                jj = knight[knight_map[ni][nj]][1]
+                ww = knight[knight_map[ni][nj]][2]
+                hh = knight[knight_map[ni][nj]][3]
+                knight_move_check(knight_map[ni][nj],ii,jj,ww,hh,d)
+        
+    if flag == 1:
+        return False
     return True
 
 #함정 체크하고 함정만큼 나이트 체력 깎기
 def check_hole(knight_num,r,c,w,h):
-    global knight
     global answer
     cnt = 0
     for i in range(r,r+h):
         for j in range(c,c+w):
+
             if chess[i][j] == 1:
                 cnt += 1
 
     knight[knight_num][4] -= cnt
-    answer += cnt
+    score[knight_num] += cnt
+  
     if knight[knight_num][4] <= 0:
         end[knight_num] = 1
+    
         r = knight[knight_num][0]
         c = knight[knight_num][1]
         w = knight[knight_num][2]
@@ -106,24 +114,46 @@ def check_hole(knight_num,r,c,w,h):
 
 #기사 밀리는거
 def knight_move(first_knight_num,knight_num,r,c,w,h,d):
+    global answer
     
     for i in range(r,r+h):
+        
         for j in range(c,c+w):
-            i += dr[d]
-            j += dc[d]
-            if knight_map[i][j] != knight_num and knight_map[i][j] != -1:
-                ii = knight[knight_map[i][j]][0]
-                jj = knight[knight_map[i][j]][1]
-                wi = knight[knight_map[i][j]][2]
-                hi = knight[knight_map[i][j]][3]
-                knight_move(first_knight_num,knight_map[i][j],ii,jj,wi,hi,d)
-            knight_map[i][j] = knight_num
-            i -= dr[d]
-            j -= dc[d]
-            knight_map[i][j] = -1
+            ni = i+ dr[d]
+            nj = j+dc[d]
+     
+            
+            if knight_map[ni][nj] != knight_num and knight_map[ni][nj] != -1:
+                ii = knight[knight_map[ni][nj]][0]
+                jj = knight[knight_map[ni][nj]][1]
+                wi = knight[knight_map[ni][nj]][2]
+                hi = knight[knight_map[ni][nj]][3]
+          
+                knight_move(first_knight_num,knight_map[ni][nj],ii,jj,wi,hi,d)
+  
+            knight_map[ni][nj] = knight_num
+
+    knight[knight_num][0] = r+dr[d]
+    knight[knight_num][1] = c+dc[d]
+
+    if d == 0:
+        for j in range(c,c+w):
+            knight_map[r+h-1][j] = -1
+    elif d == 1:
+        for i in range(r,r+h):
+            knight_map[i][c] = -1
+    elif d == 2:
+        for j in range(c,c+w):
+            knight_map[r][j] = -1 
+    elif d == 3:
+        for i in range(r,r+h):
+            knight_map[i][c+w-1] = -1
 
     if knight_num != first_knight_num:
-        check_hole(knight_num,r,c,w,h)
+        check_hole(knight_num,r+dr[d],c+dc[d],w,h)
+    else:
+        knight[first_knight_num][0] = r+dr[d]
+        knight[first_knight_num][1] = c+dc[d]
     return
 
 #기사 이동 명령
@@ -131,12 +161,19 @@ def knight_order(i,d):
     r,c,w,h,k = knight[i]
    
     if knight_move_check(i,r,c,w,h,d):
+
         knight_move(i,i,r,c,w,h,d)
 
 
 for i,d in order:
+
     if end[i] == 1:
         continue
     knight_order(i,d)
 
-print(answer)
+result = 0
+for i in range(N):
+    if end[i] == 0:
+        result += score[i]
+
+print(result)
