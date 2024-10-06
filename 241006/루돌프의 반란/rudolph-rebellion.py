@@ -137,7 +137,7 @@ def rudolf_move(ik):
                     break
             
 
-def santa_move(i):
+def santa_move(iok):
     global santa
     global rudolf
     global honsu
@@ -185,7 +185,7 @@ def santa_move(i):
             santa[k][2] = (santa[k][2]+2) % 4
             santa[k][0] = santa[k][0]+ dr[santa[k][2]]*D
             santa[k][1] = santa[k][1] + dc[santa[k][2]]*D
-            honsu[k][1] = 1
+            honsu[k] = [iok+2,1]
  
             if not check_range(santa[k][0],santa[k][1]):
                 end[k] = 1
