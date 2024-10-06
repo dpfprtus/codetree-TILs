@@ -94,7 +94,6 @@ def check_hole(knight_num,r,c,w,h):
     cnt = 0
     for i in range(r,r+h):
         for j in range(c,c+w):
-
             if chess[i][j] == 1:
                 cnt += 1
 
@@ -114,7 +113,6 @@ def check_hole(knight_num,r,c,w,h):
 
 #기사 밀리는거
 def knight_move(first_knight_num,knight_num,r,c,w,h,d):
-    global answer
     
     for i in range(r,r+h):
         
@@ -151,9 +149,6 @@ def knight_move(first_knight_num,knight_num,r,c,w,h,d):
 
     if knight_num != first_knight_num:
         check_hole(knight_num,r+dr[d],c+dc[d],w,h)
-    else:
-        knight[first_knight_num][0] = r+dr[d]
-        knight[first_knight_num][1] = c+dc[d]
     return
 
 #기사 이동 명령
@@ -164,9 +159,7 @@ def knight_order(i,d):
 
         knight_move(i,i,r,c,w,h,d)
 
-
 for i,d in order:
-
     if end[i] == 1:
         continue
     knight_order(i,d)
