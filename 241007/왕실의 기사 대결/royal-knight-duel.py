@@ -65,8 +65,8 @@ dc = [0,1,0,-1]
 
 
 #기사가 밀칠 수 있는지 체크
-def knight_move_check(r,c,w,h,d):
-    knight_num = knight_map[r][c]
+def knight_move_check(k,r,c,w,h,d):
+
     for i in range(r,r+h):
         for j in range(c,c+w):
             i += dr[d]
@@ -74,12 +74,17 @@ def knight_move_check(r,c,w,h,d):
        
             if not check_range(i,j) or chess[i][j] == 2:
                 return False
-            if knight_map[i][j] != -1 and knight_map[i][j] != knight_num:
-                knight_move_check(i,j,w,h,d)
+            if knight_map[i][j] != -1 and knight_map[i][j] != k:
+                i = knight[knight_map[i][j]][0]
+                j = knight[knight_map[i][j]][1]
+                w = knight[knight_map[i][j]][2]
+                h = knight[knight_map[i][j]][3]
+                knight_move_check(knight_map[i][j],i,j,w,h,d)
     return True
 
 #함정 체크하고 함정만큼 나이트 체력 깎기
 def check_hole(knight_num,r,c,w,h):
+    global knight
     global answer
     cnt = 0
     for i in range(r,r+h):
@@ -100,17 +105,18 @@ def check_hole(knight_num,r,c,w,h):
                 knight_map[i][j] = -1
 
 #기사 밀리는거
-def knight_move(first_knight_num,r,c,w,h,d):
+def knight_move(first_knight_num,knight_num,r,c,w,h,d):
     
-    knight_num = knight_map[r][c]
-
     for i in range(r,r+h):
         for j in range(c,c+w):
             i += dr[d]
             j += dc[d]
-
-            if knight_map[i][j] != -1 and knight_map[i][j] != knight_num:
-                knight_move(first_knight_num,i,j,w,h,d)
+            if knight_map[i][j] != knight_num and knight_map[i][j] != -1:
+                i = knight[knight_map[i][j]][0]
+                j = knight[knight_map[i][j]][1]
+                w = knight[knight_map[i][j]][2]
+                h = knight[knight_map[i][j]][3]
+                knight_move(first_knight_num,knight_map[i][j],i,j,w,h,d)
             knight_map[i][j] = knight_num
             i -= dr[d]
             j -= dc[d]
@@ -124,8 +130,8 @@ def knight_move(first_knight_num,r,c,w,h,d):
 def knight_order(i,d):
     r,c,w,h,k = knight[i]
    
-    if knight_move_check(r,c,w,h,d):
-        knight_move(i,r,c,w,h,d)
+    if knight_move_check(i,r,c,w,h,d):
+        knight_move(i,i,r,c,w,h,d)
 
 
 for i,d in order:
