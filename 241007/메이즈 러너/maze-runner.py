@@ -191,10 +191,9 @@ def run():
     spin()
     
 #게임 시작
+flag = 0
 for _ in range(K):
     run()
-
-    flag = 0
     for r,c,k in people:
         if k == 0:
             flag = 0
