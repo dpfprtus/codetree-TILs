@@ -61,6 +61,8 @@ def check_range(x,y):
 def minimum_distance(k,r,c):
 
     now_distance = abs(r-dest[0])+abs(c-dest[1])
+    appendix = []
+
     for i in range(4):
         nr,nc = r+dr[i],c+dc[i]
 
@@ -70,15 +72,21 @@ def minimum_distance(k,r,c):
         tmp = abs(nr-dest[0])+abs(nc-dest[1])
 
         if tmp < now_distance:
-            people[k][0] = nr
-            people[k][1] = nc
-            move[k] += 1
+            now_distance = tmp
+            appendix = [nr,nc]
 
-            if nr == dest[0] and nc == dest[1]:
-                people[k][2] = 1
-            return True
-    
-    return False
+
+    if len(appendix) == 0:
+        return
+
+    people[k][0] = appendix[0]
+    people[k][1] = appendix[1]
+    move[k] += 1
+
+    if appendix[0] == dest[0] and appendix[1] == dest[1]:
+        people[k][2] = 1
+
+    return
         
 #참가자 이동
 def people_move():
@@ -94,8 +102,6 @@ def people_move():
         #가장 작은 크기를 갖는 정사각항이 2개이상 -> 좌상단 r좌표가 작고, c좌표가 작은 것 우선시
         #시계방향으로 90도 회전하며, 회전된 벽은 내구도 1씩 깎임
 
-
-#범위에 출구와 참가자 퐆함되어 있는지 검사
 def spin_rectangle(r,c,cm,people_tmp):
     tmp = [[0]*cm for _ in range(cm)]
     people_miro = [[0]*N for _ in range(N)]
@@ -139,6 +145,7 @@ def spin_rectangle(r,c,cm,people_tmp):
     for a in range(r,r+cm):
         for b in range(c,c+cm):
             miro[a][b] = tmp[a-r][b-c]
+
             if miro[a][b] == -1:
                 dest[0] = a
                 dest[1] = b
@@ -157,7 +164,10 @@ def spin():
                 c = j
                 nr = r+cnt
                 nc = c+cnt 
-        
+
+                if not check_range(nr,nc):
+                    break
+                    
                 people_tmp = []
                 if (r<= dest[0]<= nr and c <= dest[1] <= nc):
                     for idx,(a1,b1,c1) in enumerate(people):
@@ -183,12 +193,14 @@ def run():
 #게임 시작
 for _ in range(K):
     run()
+
     flag = 0
     for r,c,k in people:
         if k == 0:
             flag = 0
             break
         flag = 1
+
     if flag == 1:
         break
 
