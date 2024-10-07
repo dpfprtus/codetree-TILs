@@ -160,8 +160,6 @@ def run():
 
 for t in range(K):
     run()
-    if all(k == 1 for r, c, k in people):
-        break
 
 print(sum(move))
 print(dest[0]+1,dest[1]+1)
