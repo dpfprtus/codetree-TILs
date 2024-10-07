@@ -124,8 +124,6 @@ def spin_rectangle(idx):
 def spin():
     distance = []
     for idx,(r,c,k) in enumerate(people):
-        if k == 1:
-            continue
         distance.append(spin_rectangle(idx))
     distance.sort()
     d,r,c = distance[0]
