@@ -151,8 +151,10 @@ def spin_rectangle(r,c,cm,people_tmp):
                 dest[1] = b
 
             if miro[a][b] > 0:
+                
                 miro[a][b] -= 1
-
+            
+    return
 
 def spin():
     cm = 2
@@ -166,7 +168,7 @@ def spin():
                 nc = c+cnt 
 
                 if not check_range(nr,nc):
-                    break
+                    continue
                     
                 people_tmp = []
                 if (r<= dest[0]<= nr and c <= dest[1] <= nc):
@@ -178,6 +180,7 @@ def spin():
                 
                 if len(people_tmp) != 0:
                         #회전
+     
                     spin_rectangle(r,c,cm,people_tmp)
                     return
         cm += 1
