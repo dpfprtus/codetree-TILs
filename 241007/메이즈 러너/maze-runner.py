@@ -191,16 +191,10 @@ def run():
     spin()
     
 #게임 시작
-flag = 0
+
 for _ in range(K):
     run()
-    for r,c,k in people:
-        if k == 0:
-            flag = 0
-            break
-        flag = 1
-
-    if flag == 1:
+    if all(k == 1 for r, c, k in people):
         break
 
 print(sum(move))
