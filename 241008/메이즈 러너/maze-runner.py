@@ -153,7 +153,7 @@ def spin():
 def run():
     people_move()
     if all(k == 1 for r, c, k in people):
-        break
+        return
     spin()
     
 #게임 시작
