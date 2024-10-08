@@ -73,9 +73,9 @@ dy = [1,0,-1,0]
 #포탑 x,y,공격력,공격한 턴,포탑 번호
 
 def rager(attack,defence,k,attack_tmp):
-
+    global potap
     q = deque([(attack[0],attack[1])])
-    visited = [[[]]*M for _ in range(N)]
+    visited = [[[] for _ in range(M)] for _ in range(N)]
 
     attack[2] += (N+M)
 
@@ -108,7 +108,7 @@ def rager(attack,defence,k,attack_tmp):
           
                 potap[defence[4]][2] -= attack[2]
                 #공격한 턴 입력
-                potap[attack[4]][3] = k
+                potap[attack[4]][3] = k+1
                 
                 maps[defence[0]][defence[1]] -= attack[2]
                 
@@ -147,7 +147,7 @@ def potan(attack,defence,k,attack_tmp):
     potap[defence[4]][2] -= attack[2]
     potap[attack[4]][2] += (N+M)
     maps[attack[0]][attack[1]] += (N+M)
-    potap[attack[4]][3] = k
+    potap[attack[4]][3] = k+1
 
     maps[defence[0]][defence[1]] -= attack[2]
 
@@ -198,6 +198,7 @@ def potan(attack,defence,k,attack_tmp):
 def run(i):
     attack = pick_attack()
     defence = pick_defence()
+
     attack_0 = [i for i in attack]
     defence_0 =[i for i in defence]
     attack_1 = [i for i in attack]
@@ -207,6 +208,7 @@ def run(i):
     attack_tmp = rager(attack_0,defence_0,i,[])
     if attack_tmp == False:
         attack_tmp = potan(attack_1,defence_1,i,[])
+
 
     for i in range(len(potap)):
         if potap[i][4] in attack_tmp:
@@ -228,9 +230,6 @@ for i in range(K):
             cnt += 1
     if cnt == 1:
         break
-
-
-
 
 potap.sort(key=lambda x :(-x[5],-x[2]))
 print(potap[0][2])
