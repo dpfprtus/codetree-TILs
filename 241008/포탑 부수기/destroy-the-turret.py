@@ -209,12 +209,14 @@ def run(i):
     attack_tmp = rager(attack_0,defence_0,i,[])
     if attack_tmp == False:
         attack_tmp = potan(attack_1,defence_1,i,[])
+
     cnt = 0
     for j in range(len(potap)):
         if potap[j][5] == 0:
             cnt += 1
     if cnt == 1:
         return
+        
     for i in range(len(potap)):
         if potap[i][4] in attack_tmp:
             continue
