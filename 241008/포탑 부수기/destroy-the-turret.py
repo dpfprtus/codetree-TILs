@@ -53,16 +53,17 @@ for i in range(N):
     for j in range(M):
         if a[j] != 0:
             #포탑 기록
-            potap.append([i,j,a[j],0,cnt])
+            potap.append([i,j,a[j],0,cnt,0])
             cnt += 1
     maps.append(a)
 
+
 def pick_attack():
-    potap_tmp = sorted(potap,key=lambda x :(x[2],-x[3],-(x[0]+x[1]),-x[1]))
+    potap_tmp = sorted(potap,key=lambda x :(-x[5],x[2],-x[3],-(x[0]+x[1]),-x[1]))
     return potap_tmp[0]
 
 def pick_defence():
-    potap_tmp = sorted(potap,key=lambda x :(-x[2],x[3],x[0]+x[1],x[1]))
+    potap_tmp = sorted(potap,key=lambda x :(-x[5],-x[2],x[3],x[0]+x[1],x[1]))
     return potap_tmp[0]
 
 dx = [0,1,0,-1]
@@ -98,17 +99,14 @@ def rager(attack,defence,k,attack_tmp):
                         #공격 개시
 
             if nx == defence[0] and ny == defence[1]:
-
+          
                 potap[defence[4]][2] -= attack[2]
                 #공격한 턴 입력
                 potap[attack[4]][3] = k
                 maps[defence[0]][defence[1]] -= attack[2]
           
                 if potap[defence[4]][2] <= 0:
-                    for i in range(len(potap)):
-                        if potap[i][4] == defence[i][4]:
-                            potap.remove(potap[i])
-                            break
+                    potap[defence[4]][5] = -1
 
                 a,b = nx,ny
 
@@ -117,17 +115,14 @@ def rager(attack,defence,k,attack_tmp):
                     a,b = visited[a][b]
                     if (a,b) == (attack[0],attack[1]):
                         break
-                    for a1,b1,c1,d1,e1 in potap:
+                    for a1,b1,c1,d1,e1,f1 in potap:
                         if (a1,b1) == (a,b):
                    
                             attack_tmp.append(e1)
                             potap[e1][2] -= attack[2]//2
                             attack[2]//2
                             if potap[e1][2] <= 0:
-                                for i in range(len(potap)):
-                                    if potap[i][4] == potap[e1][4]:
-                                        potap.remove(potap[i])
-                                        break
+                                potap[e1][5] = -1
                             break
                 return attack_tmp
     return False
@@ -146,10 +141,7 @@ def potan(attack,defence,k,attack_tmp):
     maps[defence[0]][defence[1]] -= attack[2]
 
     if potap[defence[4]][2] <= 0:
-        for i in range(len(potap)):
-            if potap[i][4] == defence[i][4]:
-                potap.remove(potap[i])
-                break
+        potap[defence[4]][5] = -1
 
     for i in range(8):
         nx = x+dx[i]
@@ -181,16 +173,13 @@ def potan(attack,defence,k,attack_tmp):
         if maps[nx][ny] <= 0:
             continue
         
-        for a1,b1,c1,d1,e1 in potap:
+        for a1,b1,c1,d1,e1,f1 in potap:
             if (nx,ny) == (a1,b1):
                 potap[e1][2] = potap[e1][2] - attack[2]//2
                 maps[a1][b1] = potap[e1][2] - attack[2]//2
                 attack_tmp.append(e1)
                 if potap[e1][2] <= 0:
-                    for i in range(len(potap)):
-                        if potap[i][4] == defence[i][4]:
-                            potap.remove(potap[i])
-                            break
+                    potap[e1][5] = -1
                 break
 
 
@@ -216,5 +205,5 @@ for i in range(K):
     run(i)
 
 
-potap.sort(key=lambda x :-x[2])
+potap.sort(key=lambda x :(-x[5],-x[2]))
 print(potap[0][2])
