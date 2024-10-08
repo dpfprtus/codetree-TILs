@@ -134,7 +134,7 @@ def potan(attack,defence,k,attack_tmp):
     dy = [-1,-1,-1,0,1,1,1,0]
 
     x,y = defence[0],defence[1]
-    potap[defence[2]][2] -= attack[2]
+    potap[defence[4]][2] -= attack[2]
     attack[2] += (N+M)
     potap[attack[4]][3] = k
 
