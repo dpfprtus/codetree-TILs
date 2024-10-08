@@ -53,6 +53,7 @@ for i in range(N):
     for j in range(M):
         if a[j] != 0:
             #포탑 기록
+            
             potap.append([i,j,a[j],0,cnt,0])
             cnt += 1
     maps.append(a)
@@ -168,8 +169,7 @@ def potan(attack,defence,k,attack_tmp):
         elif nx < 0 and ny >= M:
             nx = N-1
             ny = 0
-        elif nx < 0:
-            nx = N-1
+      
         if maps[nx][ny] <= 0:
             continue
         
@@ -188,6 +188,7 @@ def potan(attack,defence,k,attack_tmp):
 def run(i):
     attack = pick_attack()
     defence = pick_defence()
+
     attack_tmp = []
     attack_tmp = rager(attack,defence,i,[])
     if attack_tmp == False:
@@ -195,15 +196,24 @@ def run(i):
 
     for i in range(len(potap)):
         if potap[i][4] in attack_tmp:
+        
             continue
-        if potap[i][4] == attack[4] or potap[i][4] == defence[4]:
+        if potap[i][4] == attack[4] or potap[i][4] == defence[4] or potap[i][5] == -1:
             continue
         potap[i][2] += 1        
     return 
 
+flag = 0
 for i in range(K):
     run(i)
 
+    for i in range(len(potap)):
+        if potap[i][5] == 0:
+            flag = 0
+            break
+        flag = 1
+    if flag == 1:
+        break
 
 potap.sort(key=lambda x :(-x[5],-x[2]))
 print(potap[0][2])
