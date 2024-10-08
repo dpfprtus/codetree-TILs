@@ -189,9 +189,9 @@ def run(i):
     attack = pick_attack()
     defence = pick_defence()
     attack_tmp = []
-    attack_tmp = rager(attack,defence,i,attack_tmp)
+    attack_tmp = rager(attack,defence,i,[])
     if attack_tmp == False:
-        attack_tmp = potan(attack,defence,i,attack_tmp)
+        attack_tmp = potan(attack,defence,i,[])
 
     for i in range(len(potap)):
         if potap[i][4] in attack_tmp:
