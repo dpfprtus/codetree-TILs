@@ -78,8 +78,6 @@ def rager(attack,defence,k,attack_tmp):
     visited = [[[] for _ in range(M)] for _ in range(N)]
 
     attack[2] += (N+M)
-
-    potap[attack[4]][2] += (N+M)
     maps[attack[0]][attack[1]] += (N+M)
 
     while q:
@@ -107,6 +105,7 @@ def rager(attack,defence,k,attack_tmp):
             if nx == defence[0] and ny == defence[1]:
           
                 potap[defence[4]][2] -= attack[2]
+                potap[attack[4]][2] += (N+M)
                 #공격한 턴 입력
                 potap[attack[4]][3] = k+1
                 
@@ -124,7 +123,6 @@ def rager(attack,defence,k,attack_tmp):
                     if (a,b) == (attack[0],attack[1]):
                         break
                     for a1,b1,c1,d1,e1,f1 in potap:
-
                         if (a1,b1) == (a,b):
                             attack_tmp.append(e1)
                             potap[e1][2] -= attack[2]//2
@@ -142,13 +140,16 @@ def potan(attack,defence,k,attack_tmp):
     dy = [-1,-1,-1,0,1,1,1,0]
 
     x,y = defence[0],defence[1]
-    
+
     attack[2] += (N+M)
-    potap[defence[4]][2] -= attack[2]
+
+
     potap[attack[4]][2] += (N+M)
+
     maps[attack[0]][attack[1]] += (N+M)
     potap[attack[4]][3] = k+1
 
+    potap[defence[4]][2] -= attack[2]
     maps[defence[0]][defence[1]] -= attack[2]
 
     if potap[defence[4]][2] <= 0:
