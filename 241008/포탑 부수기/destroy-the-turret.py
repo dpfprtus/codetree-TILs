@@ -203,16 +203,15 @@ def run(i):
         potap[i][2] += 1        
     return 
 
-flag = 0
+
 for i in range(K):
     run(i)
-
+    cnt = 0
     for i in range(len(potap)):
         if potap[i][5] == 0:
-            flag = 0
-            break
-        flag = 1
-    if flag == 1:
+            cnt += 1
+
+    if cnt == 1:
         break
 
 potap.sort(key=lambda x :(-x[5],-x[2]))
