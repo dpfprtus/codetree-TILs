@@ -122,6 +122,8 @@ def rager(attack,defence,k,attack_tmp):
                     if (a,b) == (attack[0],attack[1]):
                         break
                     for a1,b1,c1,d1,e1,f1 in potap:
+                        if f1 == -1:
+                            continue
                         if (a1,b1) == (a,b):
                             attack_tmp.append(e1)
                             potap[e1][2] -= attack[2]//2
