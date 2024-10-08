@@ -207,10 +207,9 @@ def run(i):
 for i in range(K):
     run(i)
     cnt = 0
-    for i in range(len(potap)):
-        if potap[i][5] == 0:
+    for j in range(len(potap)):
+        if potap[j][5] == 0:
             cnt += 1
-
     if cnt == 1:
         break
 
