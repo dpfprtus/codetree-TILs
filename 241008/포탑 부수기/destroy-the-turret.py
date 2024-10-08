@@ -162,22 +162,24 @@ def potan(attack,defence,k,attack_tmp):
         if nx < 0 and ny < 0:
             nx = N-1
             ny = M-1
-        elif ny < 0:
-            ny = M-1
-        elif nx >= N and ny < 0:
+        if nx < 0 and ny >= M:
+            nx = N-1
+            ny = 0
+        if nx >= N and ny < 0:
             nx = 0
+            ny = M-1
+        if nx >= N and ny >= M:
+            nx = 0
+            ny = 0
+        elif ny < 0:
             ny = M-1
         elif nx >= N:
             nx = 0
-        elif nx >= N and ny >= M:
-            nx = 0
-            ny = 0
+        elif nx < 0:
+            nx = N-1
         elif ny >= M:
             ny = 0
-        elif nx < 0 and ny >= M:
-            nx = N-1
-            ny = 0
-      
+
         if maps[nx][ny] <= 0:
             continue
         
