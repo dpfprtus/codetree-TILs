@@ -191,14 +191,13 @@ def potan(attack,defence,k,attack_tmp):
                 if potap[e1][2] <= 0:
                     potap[e1][5] = -1
                 break
-
-
     return attack_tmp
 
 def run(i):
     attack = pick_attack()
     defence = pick_defence()
-
+    if (attack[0],attack[1]) == (defence[0],defence[1]):
+        return
     attack_0 = [i for i in attack]
     defence_0 =[i for i in defence]
     attack_1 = [i for i in attack]
