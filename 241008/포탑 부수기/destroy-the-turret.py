@@ -77,6 +77,7 @@ def rager(attack,defence,k,attack_tmp):
     q = deque([(attack[0],attack[1])])
     visited = [[[]]*M for _ in range(N)]
     attack[2] += (N+M)
+    potap[attack[5]][2] += (N+M)
     while q:
         x,y = q.popleft()
         for i in range(4):
@@ -121,7 +122,7 @@ def rager(attack,defence,k,attack_tmp):
                    
                             attack_tmp.append(e1)
                             potap[e1][2] -= attack[2]//2
-                            attack[2]//2
+               
                             if potap[e1][2] <= 0:
                                 potap[e1][5] = -1
                             break
@@ -137,6 +138,7 @@ def potan(attack,defence,k,attack_tmp):
     x,y = defence[0],defence[1]
     potap[defence[4]][2] -= attack[2]
     attack[2] += (N+M)
+    potap[attack[5]][2] += (N+M)
     potap[attack[4]][3] = k
 
     maps[defence[0]][defence[1]] -= attack[2]
@@ -189,14 +191,16 @@ def run(i):
     attack = pick_attack()
     defence = pick_defence()
 
+    attack_1 = [i for i in attack]
+    defence_1 = [i for i in defence]
+
     attack_tmp = []
     attack_tmp = rager(attack,defence,i,[])
     if attack_tmp == False:
-        attack_tmp = potan(attack,defence,i,[])
+        attack_tmp = potan(attack_1,defence_1,i,[])
 
     for i in range(len(potap)):
         if potap[i][4] in attack_tmp:
-        
             continue
         if potap[i][4] == attack[4] or potap[i][4] == defence[4] or potap[i][5] == -1:
             continue
@@ -212,6 +216,7 @@ for i in range(K):
             cnt += 1
     if cnt == 1:
         break
+
 
 potap.sort(key=lambda x :(-x[5],-x[2]))
 print(potap[0][2])
