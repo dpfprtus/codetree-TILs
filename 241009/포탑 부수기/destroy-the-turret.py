@@ -117,8 +117,8 @@ def rager(attack,defence,k,attack_tmp):
 
                 while (a,b) != (attack[0],attack[1]):
         
-                    a,b = visited[a][b]
-                   
+                    a3,b3 = visited[a][b]
+                    a,b = a3,b3
                     if (a,b) == (attack[0],attack[1]):
                         break
                     for a1,b1,c1,d1,e1,f1 in potap:
@@ -190,7 +190,7 @@ def run(i):
     defence = pick_defence()
     if (attack[0],attack[1]) == (defence[0],defence[1]):
         return
-    print("방어자",defence)
+
     attack_0 = [i for i in attack]
     defence_0 =[i for i in defence]
     attack_1 = [i for i in attack]
@@ -209,18 +209,18 @@ def run(i):
         return
 
     for i in range(len(potap)):
-        if potap[i][4] in attack_tmp or maps[potap[i][0]][potap[i][1]] == -1:
+        if potap[i][4] in attack_tmp or maps[potap[i][0]][potap[i][1]] <= 0:
             continue
         if potap[i][4] == attack[4] or potap[i][4] == defence[4] or potap[i][5] == -1:
             continue
         potap[i][2] += 1
+
         maps[potap[i][0]][potap[i][1]] += 1 
     return 
 
 
 for i in range(K):
-    print("시작 전",maps)
-    print("시작 전 포탑",potap)
+
     run(i)
     cnt = 0
     for j in range(len(potap)):
@@ -228,8 +228,7 @@ for i in range(K):
             cnt += 1
     if cnt == 1:
         break
-    print("시작 후",maps)
-    print("시작 후 포탑",potap)
+
 
 potap.sort(key=lambda x :(-x[5],-x[2]))
 print(potap[0][2])
