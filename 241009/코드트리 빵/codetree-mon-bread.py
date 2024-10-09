@@ -76,15 +76,13 @@ def go_store(people_x,people_y,store_x,store_y):
         visited = [[0]*n for _ in range(n)]
         q = deque([(nx,ny)])    
         
-        flag = 0
+        if (nx,ny) == (store_x,store_y):
+            return (nx,ny)
+
         if not check_range(nx,ny) or maps[nx][ny] == -2:
             continue
 
         visited[nx][ny] = 1
-
-        if (nx,ny) == (store_x,store_y):
-            return (nx,ny)
-
         while q:
             nx,ny = q.popleft()
             for j in range(4):
@@ -97,20 +95,16 @@ def go_store(people_x,people_y,store_x,store_y):
                 visited[nnx][nny] = visited[nx][ny] + 1
                 q.append((nnx,nny))
 
-                if (nnx,nny) == (store_x,store_y):
-                    if visited[nnx][nny] < minimum_distance:
-                        minimum_distance = visited[nnx][nny]
-                        goal_x,goal_y = a1,b1
-                        flag = 1
-                        break
-            if flag == 1:
-                break
+                if (nnx,nny) == (store_x,store_y) and visited[nnx][nny] < minimum_distance:
+                    minimum_distance = visited[nnx][nny]
+                    goal_x,goal_y = a1,b1
+                    break
 
     return (goal_x,goal_y)
                 
 
 #가고 싶은 편의점과 가장 가까운 베이스 캠프 계산
-def minimum_distance(store_x,store_y):
+def minimum_distances(store_x,store_y):
 
     #행이 작고 열이 작은 거 우선
     base_camp.sort(key=lambda x:(x[0],x[1]))
@@ -121,13 +115,12 @@ def minimum_distance(store_x,store_y):
 
     goal_idx = 0
     for idx,(x,y) in enumerate(base_camp):
-
         if maps[x][y] == -2:
             continue
-
         q = deque([(x,y)])
         visited = [[0]*n for _ in range(n)]
         visited[x][y] = 1
+        
         flag = 0
         while q:
             r,c = q.popleft()
@@ -135,7 +128,7 @@ def minimum_distance(store_x,store_y):
                 nr = r + dx[i]
                 nc = c + dy[i]
 
-                if not check_range(nr,nc) or visited[nr][nc] != 0 or maps[nr][nc] == -2:
+                if not check_range(nr,nc) or visited[nr][nc] != 0 or (maps[nr][nc] == -2):
                     continue
                 
                 visited[nr][nc] = visited[r][c] + 1
@@ -146,21 +139,20 @@ def minimum_distance(store_x,store_y):
                         minimum_distance = visited[nr][nc]    
                         minimum_basecamp_x,minimum_basecamp_y = x,y
                         goal_idx = idx
-                        flag = 1
                         break
-            if flag == 1:
-                break
     return (minimum_basecamp_x,minimum_basecamp_y,goal_idx)
 
 #사람이 도착한 편의점 좌표를 -2로 변환해 못가게 함.
 def check_store_basecamp():
 
     global goal_store
+    global goal_basecamp
+    global maps
     for i in range(n):
         for j in range(n):
-            if (i,j) in goal_store or (i,j) in goal_basecamp:
+            if [i,j] in goal_store or [i,j] in goal_basecamp:
                 maps[i][j] = -2
-
+    
 
 def check_time():
     for a,b,c in people:
@@ -169,6 +161,7 @@ def check_time():
     return True
     
 while True:
+
     check_store_basecamp()
 
     for idx,(people_x,people_y,c) in enumerate(people):
@@ -192,15 +185,13 @@ while True:
         #액션 2
         #편의점 도착 시 이동 정지
         if time <= m and idx+1 == time:
-      
-            (basecamp_x,basecamp_y,goal_idx) = minimum_distance(store[idx][0],store[idx][1])
+            (basecamp_x,basecamp_y,goal_idx) = minimum_distances(store[idx][0],store[idx][1])
             people[idx][0] = basecamp_x
             people[idx][1] = basecamp_y
             goal_basecamp.append([basecamp_x,basecamp_y])
 
-    print("최종",time,people)
         #액션 3
     if check_time():
-        print(time+1)
+        print(time)
         break
     time += 1
