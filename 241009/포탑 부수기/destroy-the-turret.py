@@ -116,9 +116,9 @@ def rager(attack,defence,k,attack_tmp):
                 a,b = nx,ny
 
                 while (a,b) != (attack[0],attack[1]):
-        
                     a3,b3 = visited[a][b]
                     a,b = a3,b3
+                    maps[a][b] -= attack[2]//2
                     if (a,b) == (attack[0],attack[1]):
                         break
                     for a1,b1,c1,d1,e1,f1 in potap:
@@ -127,10 +127,11 @@ def rager(attack,defence,k,attack_tmp):
                         if (a1,b1) == (a,b):
                             attack_tmp.append(e1)
                             potap[e1][2] -= attack[2]//2
-                            maps[potap[e1][0]][potap[e1][1]] -= attack[2]//2
+                            
                             if potap[e1][2] <= 0:
                                 potap[e1][5] = -1
                             break
+                    
                 return attack_tmp
     return False
             
