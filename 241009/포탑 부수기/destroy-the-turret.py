@@ -74,13 +74,14 @@ dy = [1,0,-1,0]
 
 def rager(attack,defence,k,attack_tmp):
     global potap
-    q = deque([(attack[0],attack[1])])
+    
+    q = deque([(attack[0],attack[1],[])])
     visited = [[[] for _ in range(M)] for _ in range(N)]
 
     attack[2] += (N+M)
 
     while q:
-        x,y = q.popleft()
+        x,y,attack_temp = q.popleft()
         for i in range(4):
             nx = x + dx[i]
             ny = y + dy[i]
@@ -96,7 +97,9 @@ def rager(attack,defence,k,attack_tmp):
    
             if maps[nx][ny] <= 0 or len(visited[nx][ny]) != 0 or (nx,ny) == (attack[0],attack[1]):
                 continue
-            q.append((nx,ny))
+            temp = attack_temp[:]
+            temp.append([x,y])
+            q.append((nx,ny,temp))
             visited[nx][ny] = [x,y]
             
                         #공격 개시
@@ -113,18 +116,15 @@ def rager(attack,defence,k,attack_tmp):
                 if potap[defence[4]][2] <= 0:
                     potap[defence[4]][5] = -1
 
-                a,b = nx,ny
-
-                while (a,b) != (attack[0],attack[1]):
-                    a3,b3 = visited[a][b]
-                    a,b = a3,b3
+                for a,b in attack_temp:
+                    if (a,b) == (nx,ny):
+                        continue
                     if (a,b) == (attack[0],attack[1]):
                         break
                     for a1,b1,c1,d1,e1,f1 in potap:
                         if f1 == -1:
                             continue
                         if (a1,b1) == (a,b):
-                            attack_tmp.append(e1)
                             potap[e1][2] -= attack[2]//2
                             maps[potap[e1][0]][potap[e1][1]] -= attack[2]//2
                             if potap[e1][2] <= 0:
