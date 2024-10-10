@@ -45,6 +45,8 @@ def down(weight):
             box_id,box_weight = belt_q[i].popleft()
             box_list.append([box_id,box_weight])
         else:
+            if len(belt_q[i]) == 0:
+                continue
             first = belt_q[i].popleft()
             belt_q[i].append(first)
     return box_list
