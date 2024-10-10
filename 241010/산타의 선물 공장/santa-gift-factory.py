@@ -37,10 +37,13 @@ def make_belt(n,m,combo):
 
 def down(weight):
     global belt_q
+    global break_belt_list
     global n
     global m
     box_list = []
     for i in range(m):
+        if i in break_belt_list:
+            continue
         if len(belt_q[i]) != 0 and belt_q[i][0][1] <= weight:
             box_id,box_weight = belt_q[i].popleft()
             box_list.append([box_id,box_weight])
@@ -56,6 +59,8 @@ def remove(r_id):
     global belt_q
 
     for i in range(m):
+        if i in break_belt_list:
+            continue
         if len(belt_q[i]) == 0:
             continue
         for idx,(box_id,weight) in enumerate(belt_q[i]):
@@ -75,6 +80,8 @@ def check_box(f_id):
     global n
 
     for i in range(m):
+        if i in break_belt_list:
+            continue
         if len(belt_q[i]) == 0:
             continue
         for box_id,weight in belt_q[i]:
@@ -101,9 +108,9 @@ def belt_break(b_num):
     global m
     b_num -= 1
     break_belt_list.append(b_num)
-
+    next_belt = b_num
     while True:
-        next_belt = (b_num+1) % m
+        next_belt = (next_belt+1) % m
 
         if next_belt in break_belt_list:
             continue
