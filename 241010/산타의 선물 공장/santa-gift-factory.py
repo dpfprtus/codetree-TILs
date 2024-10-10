@@ -94,10 +94,7 @@ def check_box(f_id):
                 elif idx == len(belt_q[i])-1:
                     return i
                 else: 
-                    for _ in range(idx):
-                        first = belt_q[i].popleft()
-                        belt_q[i].append(first)
-
+                    belt_q[i].rotate(idx-1)
                     return i
     return -1
             
