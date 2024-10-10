@@ -85,16 +85,16 @@ def check_box(f_id):
             continue
         if len(belt_q[i]) == 0:
             continue
-        for box_id,weight in belt_q[i]:
+        for idx,(box_id,weight) in enumerate(belt_q[i]):
             if  box_id == f_id:
-                if box_id == 0:
+                if idx == 0:
                     first = belt_q[i].popleft()
                     belt_q[i].append(first)
                     return i
-                elif box_id == len(belt_q[i])-1:
+                elif idx == len(belt_q[i])-1:
                     return i
-                else:
-                    for _ in range(i+1):
+                else: 
+                    for _ in range(idx):
                         first = belt_q[i].popleft()
                         belt_q[i].append(first)
 
