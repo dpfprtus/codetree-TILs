@@ -113,8 +113,8 @@ def belt_break(b_num):
         if next_belt in break_belt_list:
             continue
 
-        while len(belt_q[b_num]) != 0:
-            belt_q[next_belt].append(belt_q[b_num].popleft())
+        belt_q[next_belt].extend(belt_q[b_num])
+        belt_q[b_num] = deque([])
         return
 
 belt_q = deque([])
