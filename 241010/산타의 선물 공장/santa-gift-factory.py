@@ -50,9 +50,8 @@ def down(weight):
             continue
         elif len(belt_q[i]) == 0:
             continue
- 
-        first = belt_q[i].popleft()
-        belt_q[i].append(first)
+        belt_q[i].rotate(1)
+        
     return box_list
 
 def remove(r_id):
@@ -116,6 +115,7 @@ def belt_break(b_num):
         belt_q[next_belt].extend(belt_q[b_num])
         belt_q[b_num] = deque([])
         return
+
 
 belt_q = deque([])
 n,m = 0,0
