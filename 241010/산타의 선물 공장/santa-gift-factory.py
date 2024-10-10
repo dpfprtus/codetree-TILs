@@ -163,7 +163,7 @@ for k in range(q):
 
     #벨트 고장
     elif order[0] == 500:
-        if order[1] in break_belt_list:
+        if order[1]-1 in break_belt_list:
             print(-1)
         else:
             belt_break(order[1])
