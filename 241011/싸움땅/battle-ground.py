@@ -154,8 +154,8 @@ def move_player(play_idx):
         else:
             #맵의 총이 공격력이 높다면 교환
             max_gun_maps = max(maps[nx][ny])
-    
-            if max(player_gun[play_idx]) < max_gun_maps:
+            max_gun_player = max(player_gun[play_idx])
+            if max_gun_player < max_gun_maps:
                 tmp = player_gun[play_idx]
                 player_gun[play_idx] = [max_gun_maps]
 
@@ -164,6 +164,10 @@ def move_player(play_idx):
 
                 if len(maps[nx][ny]) == 0:
                     maps[nx][ny].append(0)
+            else:
+                player_gun[play_idx].remove(max_gun_player)
+                maps[nx][ny].extend(player_gun[play_idx])
+                player_gun[play_idx] = [max_gun_player]
     
     elif player_map_idx != -1:
  
