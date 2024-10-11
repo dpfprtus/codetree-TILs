@@ -101,6 +101,7 @@ def fight(play_idx,player_map_idx):
     else:
         win_player_idx = player_map_idx
         lose_player_idx = play_idx
+
     return (win_player_idx,lose_player_idx)
 
 def move_lose_player(player_idx):
@@ -127,11 +128,9 @@ def move_lose_player(player_idx):
             maps[nx][ny].remove(max_gun)
 
             if len(maps[nx][ny]) == 0:
-                maps[nx][ny].append(0)
+                maps[nx][ny] = [0]
       
         break
-    
-        
 
 def move_player(play_idx):
     global player_point
@@ -153,8 +152,10 @@ def move_player(play_idx):
     if maps[nx][ny][0] != 0 and player_map_idx == -1:
 
         if len(player_gun[play_idx]) == 0:
-            player_gun[play_idx] = maps[nx][ny]
-            maps[nx][ny] = [0]
+            player_gun[play_idx] = [max(maps[nx][ny])]
+            maps[nx][ny].remove(max(maps[nx][ny]))
+            if len(maps[nx][ny]) == 0:
+                maps[nx][ny] = [0]
 
         else:
             #맵의 총이 공격력이 높다면 교환
@@ -168,7 +169,7 @@ def move_player(play_idx):
                 maps[nx][ny].extend(tmp)
 
                 if len(maps[nx][ny]) == 0:
-                    maps[nx][ny].append(0)
+                    maps[nx][ny] = [0]
             else:
                 player_gun[play_idx].remove(max_gun_player)
                 maps[nx][ny].extend(player_gun[play_idx])
@@ -209,7 +210,6 @@ def move_player(play_idx):
                 player_gun[win_player_idx].remove(max_player_gun)
                 maps[nx][ny].extend(player_gun[win_player_idx])
                 player_gun[win_player_idx] = [max_player_gun]
-
 
     return
 
