@@ -46,6 +46,7 @@ for i in range(n):
 players = []
 player_point = [0]*m
 player_gun = [[] for _ in range(m)]
+
 for i in range(m):
 
     #x,y 위치 d 방향 s초기 능력치(모두 다름), #0 1 2 3, 상 우 하 좌
@@ -103,11 +104,14 @@ def fight(play_idx,player_map_idx):
     return (win_player_idx,lose_player_idx)
 
 def move_lose_player(player_idx):
+
     x,y,d = players[player_idx][0], players[player_idx][1], players[player_idx][2]
 
     for _ in range(4):
+
         nx = x + dx[d]
         ny = y + dy[d]
+
         if not check_range(nx,ny) or check_player_maps(nx,ny,player_idx) != -1:
             d = (d+1)%4
             players[player_idx][2] = d
@@ -121,6 +125,7 @@ def move_lose_player(player_idx):
             max_gun = max(maps[nx][ny])
             player_gun[player_idx].append(max_gun)
             maps[nx][ny].remove(max_gun)
+
             if len(maps[nx][ny]) == 0:
                 maps[nx][ny].append(0)
       
@@ -134,6 +139,7 @@ def move_player(play_idx):
 
     #방향대로 한 칸 이동
     nx,ny = x + dx[d],y + dy[d]
+
     if not check_range(nx,ny):
         nx,ny = x + dx[(d+2)%4], y + dy[(d+2)%4]
         players[play_idx][2] = (d+2)%4
@@ -147,10 +153,9 @@ def move_player(play_idx):
     if maps[nx][ny][0] != 0 and player_map_idx == -1:
 
         if len(player_gun[play_idx]) == 0:
-            player_gun[play_idx].append(maps[nx][ny][0])
-            maps[nx][ny][0] = 0
+            player_gun[play_idx] = maps[nx][ny]
+            maps[nx][ny] = [0]
 
-            
         else:
             #맵의 총이 공격력이 높다면 교환
             max_gun_maps = max(maps[nx][ny])
