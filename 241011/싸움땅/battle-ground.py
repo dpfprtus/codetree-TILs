@@ -182,7 +182,7 @@ def move_player(play_idx):
         #이긴 플레이어는 칸에 떨어져있는 총을 비교
         max_gun = max(maps[nx][ny])
         max_player_gun = 0
-        
+
         if len(player_gun[win_player_idx]) != 0:
             max_player_gun = max(player_gun[win_player_idx])
 
@@ -194,6 +194,14 @@ def move_player(play_idx):
 
             if len(maps[nx][ny]) == 0:
                 maps[nx][ny].append(0)
+        
+        else:
+            if max_player_gun != 0:
+                player_gun[win_player_idx].remove(max_player_gun)
+                maps[nx][ny].extend(player_gun[win_player_idx])
+                player_gun[win_player_idx] = [max_player_gun]
+
+
     return
 
 #라운드 진행
