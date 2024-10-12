@@ -235,10 +235,10 @@ while now_round <= k:
             throw_ball(i,0,ball_d)
             now_round+=1
             game_round += 1
-            if now_round > k:
+            if now_round > k or game_round > n:
                 break
         
-    elif n < game_round <= 2*n:
+    if n < game_round <= 2*n:
 
         ball_d = 1
         for i in range(n):
@@ -246,20 +246,20 @@ while now_round <= k:
             throw_ball(n-1,i,ball_d)
             now_round+=1
             game_round += 1
-            if now_round > k:
+            if now_round > k or game_round > 2*n:
                 break
 
-    elif 2*n < game_round <= 3*n:
+    if 2*n < game_round <= 3*n:
         ball_d = 2
         for i in range(n):
             move_people()
             throw_ball(n-1-i,n-1,ball_d)
             now_round+=1
             game_round += 1
-            if now_round > k:
+            if now_round > k or game_round > 3*n:
                 break
                 
-    elif 3*n < game_round <= 4*n:
+    if 3*n < game_round <= 4*n:
         ball_d = 3
 
         for i in range(n):
