@@ -235,7 +235,7 @@ while now_round <= k:
             throw_ball(i,0,ball_d)
             now_round+=1
             game_round += 1
-            if now_round > k or game_round > n:
+            if now_round > k:
                 break
         
     if n < game_round <= 2*n:
@@ -246,7 +246,7 @@ while now_round <= k:
             throw_ball(n-1,i,ball_d)
             now_round+=1
             game_round += 1
-            if now_round > k or game_round > 2*n:
+            if now_round > k:
                 break
 
     if 2*n < game_round <= 3*n:
@@ -256,7 +256,7 @@ while now_round <= k:
             throw_ball(n-1-i,n-1,ball_d)
             now_round+=1
             game_round += 1
-            if now_round > k or game_round > 3*n:
+            if now_round > k:
                 break
                 
     if 3*n < game_round <= 4*n:
