@@ -238,7 +238,7 @@ while now_round <= k:
             if now_round > k:
                 break
         
-    if n < game_round <= 2*n:
+    elif n < game_round <= 2*n:
 
         ball_d = 1
         for i in range(n):
@@ -249,7 +249,7 @@ while now_round <= k:
             if now_round > k:
                 break
 
-    if 2*n < game_round <= 3*n:
+    elif 2*n < game_round <= 3*n:
         ball_d = 2
         for i in range(n):
             move_people()
@@ -259,7 +259,7 @@ while now_round <= k:
             if now_round > k:
                 break
                 
-    if 3*n < game_round <= 4*n:
+    elif 3*n < game_round <= 4*n:
         ball_d = 3
 
         for i in range(n):
