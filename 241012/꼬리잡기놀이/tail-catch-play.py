@@ -198,10 +198,10 @@ game_round = 1
 
 while now_round <= k:
 
-    # print("현재 라운드",now_round)
-    if 1<= game_round <= k:
+    
+    if 1<= game_round <= n:
         ball_d = 0
-
+        print("현재 라운드",now_round)
         for i in range(n):
             move_people()
             throw_ball(i,0,ball_d)
@@ -210,7 +210,8 @@ while now_round <= k:
             if now_round > k:
                 break
         
-    elif k < game_round <= 2*k:
+    elif n < game_round <= 2*n:
+
         ball_d = 1
         for i in range(n):
             move_people()
@@ -220,7 +221,7 @@ while now_round <= k:
             if now_round > k:
                 break
 
-    elif 2*k < game_round <= 3*k:
+    elif 2*n < game_round <= 3*n:
         ball_d = 2
         for i in range(n):
             move_people()
@@ -230,7 +231,7 @@ while now_round <= k:
             if now_round > k:
                 break
                 
-    elif 3*k < game_round <= 4*k:
+    elif 3*n < game_round <= 4*n:
         ball_d = 3
 
         for i in range(n):
@@ -242,7 +243,7 @@ while now_round <= k:
             if now_round > k:
                 break
 
-            if game_round > 4*k:
+            if game_round > 4*n:
                game_round = 1
                break
 
