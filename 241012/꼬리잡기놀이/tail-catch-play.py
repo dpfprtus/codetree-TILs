@@ -201,7 +201,6 @@ while now_round <= k:
     
     if 1<= game_round <= n:
         ball_d = 0
-        print("현재 라운드",now_round)
         for i in range(n):
             move_people()
             throw_ball(i,0,ball_d)
