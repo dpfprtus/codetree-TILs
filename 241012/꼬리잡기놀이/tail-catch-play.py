@@ -85,14 +85,17 @@ for i in range(m):
 #꼬리 한칸 이동
 
 # #머리부터 중간까지 한 칸 이동
-def move_one_head(x,y,tema_idx):
+
+def move_one_head(x,y,team_idx):
 
     for i in range(4):
         nx = x + dx[i]
         ny = y + dy[i]
-        if not check_range(nx,ny) or maps[nx][ny] != 4:
+        if not check_range(nx,ny):
             continue
-        return nx,ny
+
+        if maps[nx][ny] == 4:
+            return nx,ny
          
 
 def move_people():
