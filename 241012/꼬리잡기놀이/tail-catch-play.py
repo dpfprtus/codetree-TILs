@@ -71,8 +71,11 @@ def make_team(head):
                 visited[nx][ny] = 1
 
             elif maps[nx][ny] == 3:
+                if len(team_tmp) == 1:
+                    continue
                 team_tmp.append([nx,ny])
-                return team_tmp
+                visited[nx][ny] = 1
+    return team_tmp
             
 #팀 구성
 for i in range(m):
@@ -93,35 +96,58 @@ def move_one_head(x,y,team_idx):
         ny = y + dy[i]
         if not check_range(nx,ny):
             continue
-
+        
         if maps[nx][ny] == 4:
             return nx,ny
-         
+
+    return -1,-1
 
 def move_people():
     for i in range(m):
         
         #머리 이동
         head_x,head_y = team[i][0]
-        next_head_x,next_head_y = move_one_head(head_x,head_y,i)
-        maps[next_head_x][next_head_y] = 1
-        maps[head_x][head_y] = 2
-
-        #꼬리부터 한 칸 이동
-        tail_x,tail_y = team[i][-1]
-        maps[tail_x][tail_y] = 4
-
-        before_tail_x, before_tail_y = team[i][-2]
-        team[i][-1] = [before_tail_x,before_tail_y]
  
-        maps[before_tail_x][before_tail_y] = 3
-        
-        #중간 이동
-        for j in range(len(team[i])-2,0,-1):
-            people_x,people_y = team[i][j]
-            next_x,next_y = team[i][j-1]
-            team[i][j] = [next_x,next_y]
-        team[i][0] = [next_head_x,next_head_y]
+        next_head_x,next_head_y = move_one_head(head_x,head_y,i)
+
+
+        #머리랑 꼬리가 이어져있는 경우
+        if (next_head_x,next_head_y) == (-1,-1):
+            next_head_x,next_head_y = team[i][-1]
+      
+            tail_x,tail_y = team[i][-1]
+            maps[tail_x][tail_y] = 1
+
+            before_tail_x, before_tail_y = team[i][-2]
+            team[i][-1] = [before_tail_x,before_tail_y]
+            maps[before_tail_x][before_tail_y] = 3
+
+            for j in range(len(team[i])-2,0,-1):
+                people_x,people_y = team[i][j]
+                next_x,next_y = team[i][j-1]
+                team[i][j] = [next_x,next_y]
+            team[i][0] = [next_head_x,next_head_y]
+  
+ 
+        else:
+            maps[next_head_x][next_head_y] = 1
+            maps[head_x][head_y] = 2
+
+            #꼬리부터 한 칸 이동
+            tail_x,tail_y = team[i][-1]
+            maps[tail_x][tail_y] = 4
+
+            before_tail_x, before_tail_y = team[i][-2]
+            team[i][-1] = [before_tail_x,before_tail_y]
+    
+            maps[before_tail_x][before_tail_y] = 3
+            
+            #중간 이동
+            for j in range(len(team[i])-2,0,-1):
+                people_x,people_y = team[i][j]
+                next_x,next_y = team[i][j-1]
+                team[i][j] = [next_x,next_y]
+            team[i][0] = [next_head_x,next_head_y]
 
         
     return
