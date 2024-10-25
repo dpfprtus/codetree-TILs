@@ -40,7 +40,11 @@ public class Main {
         else if(m <= 2 || m >=12){
             if(yoonYear == false && m == 2 && d == 29){
                 System.out.println(-1);
-            } else{
+            }
+            else if(m == 2 && d >= 30){
+                System.out.println(-1);
+            }
+             else{
                 System.out.println("Winter");
             }
         }
