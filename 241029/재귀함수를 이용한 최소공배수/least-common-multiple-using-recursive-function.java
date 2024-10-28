@@ -14,7 +14,7 @@ public class Main {
         int gcdNum = gcd(nums[0],nums[1]);
         int lcmNum = (nums[0]*nums[1]) / gcdNum;
 
-        for(int i = 1;i<n;i++){
+        for(int i = 2;i<n;i++){
             gcdNum = gcd(lcmNum,nums[i]);
             lcmNum = (lcmNum*nums[i]) / gcdNum;
         }
