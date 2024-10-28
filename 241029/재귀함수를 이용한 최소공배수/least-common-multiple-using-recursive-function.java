@@ -10,6 +10,10 @@ public class Main {
         for(int i = 0;i<n;i++){
             nums[i] = in.nextInt();
         }
+        if(n==1){
+            System.out.println(n);
+            return;
+        }
 
         int gcdNum = gcd(nums[0],nums[1]);
         int lcmNum = (nums[0]*nums[1]) / gcdNum;
