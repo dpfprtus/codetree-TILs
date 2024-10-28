@@ -11,7 +11,7 @@ public class Main {
             nums[i] = in.nextInt();
         }
         if(n==1){
-            System.out.println(n);
+            System.out.println(nums[0]);
             return;
         }
 
