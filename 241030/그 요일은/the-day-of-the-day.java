@@ -45,7 +45,7 @@ public class Main {
         answer += nums[3];
         int tmp = answer % 7;
         answer /= 7;
-        if(tmp <= dayIdx+1){
+        if(tmp >= dayIdx+1){
             answer += 1;
         }
         System.out.print(answer);
