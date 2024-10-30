@@ -43,7 +43,7 @@ public class Main {
                 if(i == nums[0]){
                     answer += 29-nums[1]+1;
                 } else{
-                    answer += 20;
+                    answer += 29;
                 }
             }
             else if(checkNum == 1){
