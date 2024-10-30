@@ -19,6 +19,7 @@ public class Main {
         int dayIdx = Arrays.asList(dayList).indexOf(day);
         int answer = 0;
         int checkNum = 0;
+
         for(int i = nums[0];i< nums[2];i++){
             checkNum = check(i);
             if(checkNum == 2){
@@ -44,11 +45,11 @@ public class Main {
         }
         answer += nums[3];
         int tmp = answer % 7;
-        answer /= 7;
+        int result = answer / 7;
         if(tmp >= dayIdx+1){
-            answer += 1;
+            result += 1;
         }
-        System.out.print(answer);
+        System.out.print(result);
         
     }
 
