@@ -21,6 +21,7 @@ public class Main {
         
 
         int dayIdx = Arrays.asList(dayList).indexOf(day);
+        
         if(nums[0] == nums[2]){
             int answer = nums[3]-nums[1]+1;
             int tmp = answer % 7;
@@ -31,6 +32,7 @@ public class Main {
             System.out.print(result);
             return;
         }
+
         int answer = 0;
         int checkNum = 0;
         
