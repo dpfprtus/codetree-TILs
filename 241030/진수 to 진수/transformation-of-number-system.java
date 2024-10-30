@@ -14,7 +14,6 @@ public class Main {
         int decem = 0;
         int cnt = 0;
         for(int i = n.length()-1;i >= 0;i--){
-            
             decem += Math.pow(a,i)*Character.getNumericValue(n.charAt(cnt));
             cnt += 1;
         }
@@ -23,9 +22,15 @@ public class Main {
         while(decem != 0){
             answer += Integer.toString(decem%b);
             decem /= b;
-            
+
         }
-        System.out.print(answer);
+        String result = "";
+
+        for(int i = answer.length()-1;i>=0;i--){
+            result += answer.charAt(i);
+        }
+
+        System.out.print(result);
 
     }
 }
