@@ -25,10 +25,15 @@ public class Main {
                     if(tile[i] == 1){
                         lCount--;
                     }
+                    if(tile[i] != 2){
+                        rCount++;
+                    }
                     tile[i] = 2;
                     
-                    rCount++;
+                    
+                    
                 }
+
                 idx=idx+a-1;
             }else{
                 int target= idx-a;
@@ -37,8 +42,11 @@ public class Main {
                     if(tile[i] == 2){
                         rCount--;
                     }
+                    if(tile[i] != 1){
+                        lCount++;
+                    }
                     tile[i] = 1;
-                    lCount++;
+                    
                 }
                 idx = idx-a+1;
             }
