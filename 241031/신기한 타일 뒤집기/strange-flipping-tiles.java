@@ -26,13 +26,10 @@ public class Main {
                         lCount--;
                     }
                     tile[i] = 2;
-
-                    if(i!=target-1){
-                        idx++;
-                    }
                     
                     rCount++;
                 }
+                idx=idx+a-1;
             }else{
                 int target= idx-a;
 
@@ -41,14 +38,10 @@ public class Main {
                         rCount--;
                     }
                     tile[i] = 1;
-
-                    if(i != target+1){
-                        idx--;
-                    }
                     lCount++;
                 }
+                idx = idx-a+1;
             }
-
             n--;
         }
 
