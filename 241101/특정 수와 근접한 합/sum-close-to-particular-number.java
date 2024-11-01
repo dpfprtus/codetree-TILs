@@ -34,7 +34,10 @@ public class Main {
         if(x == 2){
             int result = 0;
             for(int i = 0;i<args.length;i++){
-                result += args[i];
+                if(args[i] == 0){
+                    result += nums[i];
+                }
+                
             }
             result -= s;
             if(result>=0 && maxNum >= result){
@@ -50,6 +53,7 @@ public class Main {
                 args[i] = nums[i];
                 generate(x+1,s,n);
                 visited[i] = 0;
+                args[i] = 0;
             }
         }
     }
