@@ -33,7 +33,7 @@ public class Main {
     public static void generate(int x,int s,int n){
         if(x == 2){
             int result = 0;
-            for(int i = 0;i<args.length;i++){
+            for(int i = 0;i<nums.length;i++){
                 if(args[i] == 0){
                     result += nums[i];
                 }
