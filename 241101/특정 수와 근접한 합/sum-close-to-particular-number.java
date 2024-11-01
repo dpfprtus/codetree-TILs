@@ -33,14 +33,15 @@ public class Main {
     public static void generate(int x,int s,int n){
         if(x == 2){
             int result = 0;
-            for(int i = 0;i<nums.length;i++){
+            for(int i = 0;i<n;i++){
                 if(args[i] == 0){
                     result += nums[i];
                 }
                 
             }
             result -= s;
-            if(result>=0 && maxNum >= result){
+            result = Math.abs(result);
+            if( maxNum >= result){
                 maxNum = result;
             }
             return;
@@ -50,7 +51,7 @@ public class Main {
         for(int i = 0;i<n;i++){
             if(visited[i] == 0){
                 visited[i] = 1;
-                args[i] = nums[i];
+                args[i] = 1;
                 generate(x+1,s,n);
                 visited[i] = 0;
                 args[i] = 0;
