@@ -20,7 +20,7 @@ public class Main {
         for(int i = 0;i<N;i++){
             height[i] = in.nextInt();
         }
-   
+
         for(int i = 0;i <= N-T;i++){
             int sumTmp = 0;
             for(int j =i;j<i+T;j++){
