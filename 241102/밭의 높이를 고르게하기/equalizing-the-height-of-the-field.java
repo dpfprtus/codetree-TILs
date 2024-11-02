@@ -20,12 +20,11 @@ public class Main {
         for(int i = 0;i<N;i++){
             height[i] = in.nextInt();
         }
-
-        for(int i = 0;i< N-T;i++){
-            int sumTmp = 0;
         
-            for(int j =i+1;j<i+T;j++){
-                sumTmp += Math.abs(height[j-1]-height[j]);
+        for(int i = 0;i < N-T;i++){
+            int sumTmp = 0;
+            for(int j =i;j<i+T;j++){
+                sumTmp += Math.abs(H-height[j]);
                 
             }
             answer = Math.min(answer,sumTmp);
