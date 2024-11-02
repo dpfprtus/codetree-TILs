@@ -82,7 +82,7 @@ public class Main {
             sum2 += team2[i];
         }
 
-        if(sum1 == sum2 && sum2 == team3){
+        if(sum1 == sum2 || sum2 == team3 || sum1 == team3){
             return false;
         }
         return true;
