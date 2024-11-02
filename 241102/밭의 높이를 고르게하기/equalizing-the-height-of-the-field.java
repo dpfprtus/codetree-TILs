@@ -21,7 +21,7 @@ public class Main {
             height[i] = in.nextInt();
         }
 
-        for(int i = 0;i<N;i+=T){
+        for(int i = 0;i<N-T;i+=T){
             int tmp = height[i];
             int sumTmp = 0;
             for(int j =i+1;j<i+T;j++){
