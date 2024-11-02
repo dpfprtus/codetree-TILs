@@ -21,12 +21,12 @@ public class Main {
             height[i] = in.nextInt();
         }
 
-        for(int i = 0;i<=N-T;i+=T){
-            int tmp = height[i];
+        for(int i = 0;i< N-T;i++){
             int sumTmp = 0;
+        
             for(int j =i+1;j<i+T;j++){
-                sumTmp += Math.abs(tmp-height[j]);
-                tmp = height[j];
+                sumTmp += Math.abs(height[j-1]-height[j]);
+                
             }
             answer = Math.min(answer,sumTmp);
         }
