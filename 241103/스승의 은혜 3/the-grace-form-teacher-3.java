@@ -50,6 +50,8 @@ public class Main {
             cal(ans);
             return;
         }
+        if(flag == 1)
+            return;
     
         for(int i = 0;i<N;i++){
             for(int j = 0;j<ans.length;j++){
@@ -83,7 +85,6 @@ public class Main {
         
 
         if(result <= B){
-    
             answer = ans.length;
             flag = 1;
             return true;
