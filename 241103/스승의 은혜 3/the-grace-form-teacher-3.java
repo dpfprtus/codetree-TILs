@@ -61,7 +61,11 @@ public class Main {
                     ans[j] = i;
                     dfs(x+1,ans,visited);
                     visited[j] = 0;
+                    if(flag == 1)
+                        return;
                 }
+                if(flag == 1)
+                    return;
             }
             
         }
