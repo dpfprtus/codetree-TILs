@@ -18,10 +18,11 @@ public class Main {
 
     
         int answer = 0;
-        int cnt = 0;
+        
         for(int i = 0;i<N;i++){
             int j = nums[i]-1;
             int tmp = nums[i];
+            int cnt = 0;
             while(cnt < M){
                 j = nums[j]-1;
                 tmp += nums[j];
