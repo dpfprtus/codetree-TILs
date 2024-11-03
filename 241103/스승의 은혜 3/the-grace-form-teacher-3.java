@@ -22,12 +22,20 @@ public class Main {
             deliver[i] = in.nextInt();
         }
         
-
-
         //선물 가격 -> 짝수
         //선물 하나 반값 할인 쿠폰 
+
+        int[] a = new int[N];
+        for(int i = 0;i<N;i++){
+            a[i] = i;
+        }
+        cal(a);
+        if(flag == 1){
+            System.out.print(answer);
+            return;
+        }
         
-        for(int i = N;i >= 1;i--){
+        for(int i = N-1;i >= 1;i--){
             int[] ans = new int[i];
             int[] visited = new int[i];
             dfs(0,ans,visited);
@@ -43,32 +51,40 @@ public class Main {
             return;
         }
     
-        for(int i = 0;i<ans.length;i++){
-            if (visited[i] == 0){
-                visited[i] = 1;
-                ans[i] = i;
-                dfs(x+1,ans,visited);
-                visited[i] = 0;
+        for(int i = 0;i<N;i++){
+            for(int j = 0;j<ans.length;j++){
+                if (visited[j] == 0){
+                    visited[j] = 1;
+                    ans[j] = i;
+                    dfs(x+1,ans,visited);
+                    visited[j] = 0;
+                }
             }
+            
         }
     }
 
     public static boolean cal(int[] ans){
         int result = Integer.MAX_VALUE;
+        
         for(int i = 0;i<ans.length;i++){
+          
             int tmp = 0;
             for(int j = 0;j<ans.length;j++){
-                if(i == j)
-                    tmp += (gift[ans[j]]/2+deliver[j]);
-                else
-                    tmp += (gift[ans[j]]+deliver[j]);
-
-            result = Math.min(result,tmp);
+                if(i == j){
+                    tmp += (gift[ans[j]]/2+deliver[ans[j]]);
+                }
+                else{
+                    tmp += (gift[ans[j]]+deliver[ans[j]]);
+                }
             }
+            result = Math.min(result,tmp);
         }
+        
 
         if(result <= B){
-            answer = Math.min(answer,result);
+    
+            answer = ans.length;
             flag = 1;
             return true;
         }
