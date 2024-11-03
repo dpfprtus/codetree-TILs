@@ -50,6 +50,7 @@ public class Main {
             cal(ans);
             return;
         }
+
         if(flag == 1)
             return;
     
@@ -81,6 +82,11 @@ public class Main {
                 }
             }
             result = Math.min(result,tmp);
+            if(result <= B){
+                answer = ans.length;
+                flag = 1;
+                return true;
+            }
         }
         
 
