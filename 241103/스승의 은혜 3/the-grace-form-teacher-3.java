@@ -50,10 +50,9 @@ public class Main {
             cal(ans);
             return;
         }
-
-        if(flag == 1)
+        if(flag == 1){
             return;
-    
+        }
         for(int i = 0;i<N;i++){
             for(int j = 0;j<ans.length;j++){
                 if (visited[j] == 0){
@@ -61,11 +60,8 @@ public class Main {
                     ans[j] = i;
                     dfs(x+1,ans,visited);
                     visited[j] = 0;
-                    if(flag == 1)
-                        return;
+                    
                 }
-                if(flag == 1)
-                    return;
             }
             
         }
@@ -86,18 +82,12 @@ public class Main {
                 }
             }
             result = Math.min(result,tmp);
+
             if(result <= B){
                 answer = ans.length;
                 flag = 1;
                 return true;
             }
-        }
-        
-
-        if(result <= B){
-            answer = ans.length;
-            flag = 1;
-            return true;
         }
         return false;
     }
