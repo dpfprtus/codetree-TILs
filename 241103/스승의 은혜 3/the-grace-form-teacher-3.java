@@ -37,7 +37,7 @@ public class Main {
         
         for(int i = N-1;i >= 1;i--){
             int[] ans = new int[i];
-            int[] visited = new int[i];
+            int[] visited = new int[N];
             dfs(0,ans,visited);
             if(flag == 1)
                 break;
@@ -55,11 +55,11 @@ public class Main {
         }
         for(int i = 0;i<N;i++){
             for(int j = 0;j<ans.length;j++){
-                if (visited[j] == 0){
-                    visited[j] = 1;
+                if (visited[i] == 0){
+                    visited[i] = 1;
                     ans[j] = i;
                     dfs(x+1,ans,visited);
-                    visited[j] = 0;
+                    visited[i] = 0;
                     
                 }
             }
