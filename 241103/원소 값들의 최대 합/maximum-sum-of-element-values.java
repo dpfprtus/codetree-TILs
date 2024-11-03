@@ -26,7 +26,6 @@ public class Main {
             while(cnt < M){
                 tmp += nums[j];
                 j = nums[j]-1;
-                
                 cnt++;
             }
         
