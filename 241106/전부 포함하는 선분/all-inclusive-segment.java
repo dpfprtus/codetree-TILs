@@ -39,8 +39,10 @@ public class Main {
                 k++;
             }
         }
-    
-        return num2[num2.length-1][1]-num2[0][0];
+        int a = num2[0][0];
+        Arrays.sort(num2,(c,d)->Integer.compare(c[1],d[1]));
+        int b= num2[0][1];
+        return b-a;
 
     }
 }
