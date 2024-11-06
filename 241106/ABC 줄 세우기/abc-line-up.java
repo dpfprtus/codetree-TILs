@@ -12,28 +12,20 @@ public class Main {
         N = in.nextInt();
         alpha = new char[N];
         nums = new int[N];
+        
         for(int i = 0;i<N;i++){
             alpha[i] = in.next().charAt(0);
-            nums[i] = (int)alpha[i];
         }
-        Arrays.sort(nums);
+    
         int answer = 0;
         for(int i = 0;i<N;i++){
-            if(nums[i] == (int)alpha[i])
-                continue;
-            int idx = i;
-            while(true){
-                if(idx == N)
-                    break;
-                if((int)alpha[idx] == nums[idx])
-                    break;
-                if((int)alpha[idx] > (int)alpha[idx+1]){
-                    char tmp = alpha[idx];
-                    alpha[idx] = alpha[idx+1];
-                    alpha[idx+1] = tmp;
+            for(int j =0;j<N-1;j++){
+                if((int)alpha[j] > (int)alpha[j+1]){
+                    char tmp = alpha[j];
+                    alpha[j] = alpha[j+1];
+                    alpha[j+1] = tmp; 
+                    answer++;
                 }
-                answer++;
-                idx++;
             }
         }
         System.out.print(answer);
