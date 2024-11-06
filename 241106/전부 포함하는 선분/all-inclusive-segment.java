@@ -30,7 +30,7 @@ public class Main {
         
     
     public static int check(int j){
-        int[][] num2 = new int[n-1][n-1];
+        int[][] num2 = new int[n-1][2];
 
         for(int i = 0,k=0;i<n;i++){
             if(i != j){
