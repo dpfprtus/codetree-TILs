@@ -17,6 +17,7 @@ public class Main {
         for(int num : arr)
             System.out.print(num+" ");
     }
+    
     public static void mergeSort(int[] arr,int low,int high){
         if(low == high)
             return;
