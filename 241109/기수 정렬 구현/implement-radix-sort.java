@@ -14,11 +14,12 @@ public class Main {
             arr[i] = in.nextInt();
             maxNum = Math.max(maxNum,String.valueOf(arr[i]).length());
         }
-        ArrayList<Integer>[] digitList = new ArrayList[10];
-        for(int i=0;i<10;i++)
-            digitList[i] = new ArrayList();
+        
         
         for(int k=1;k<=maxNum;k++){
+            ArrayList<Integer>[] digitList = new ArrayList[10];
+            for(int i=0;i<10;i++)
+                digitList[i] = new ArrayList();
             for(int num : arr){
                 String str = Integer.toString(num);
                 int[] tmp = new int[str.length()];
