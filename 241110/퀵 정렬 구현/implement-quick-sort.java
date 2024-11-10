@@ -17,21 +17,22 @@ public class Main {
     }
 
     public static int select(int low,int high){
-        int i = low;
+        int i = low-1;
         int pivot = arr[high];
 
         for(int j = low;j<high;j++){
-            if(arr[j] <= pivot){
+            if(arr[j] < pivot){
+                i++;
                 int tmp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = tmp;
-                i++;
+                
             }
         }
-        int tmp = arr[i];
-        arr[i] = arr[high];
+        int tmp = arr[i+1];
+        arr[i+1] = arr[high];
         arr[high] = tmp;
-        return i;
+        return i+1;
     }
 
     public static void quickSort(int low,int high){
