@@ -19,9 +19,8 @@ public class Main {
         int i = low-1;
         int pivot = arr[high];
 
-        for(int j = low;j<high;j++){
+        for(int j = low;j<=high;j++){
             if(arr[j] < pivot){
-                
                 int tmp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = tmp;
