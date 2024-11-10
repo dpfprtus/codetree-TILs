@@ -10,27 +10,28 @@ public class Main {
         arr = new int[N];
         for(int i = 0;i<N;i++)
             arr[i] = in.nextInt();
-        quickSort(1,arr.length-1);
+        quickSort(0,arr.length-1);
+
         for(int num : arr)
             System.out.print(num+" ");
     }
 
     public static int select(int low,int high){
-        int i = low-1;
+        int i = low;
         int pivot = arr[high];
 
-        for(int j = low;j<=high;j++){
-            if(arr[j] < pivot){
+        for(int j = low;j<high;j++){
+            if(arr[j] <= pivot){
                 int tmp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = tmp;
                 i++;
             }
         }
-        int tmp = arr[i+1];
-        arr[i+1] = arr[high];
+        int tmp = arr[i];
+        arr[i] = arr[high];
         arr[high] = tmp;
-        return i+1;
+        return i;
     }
 
     public static void quickSort(int low,int high){
